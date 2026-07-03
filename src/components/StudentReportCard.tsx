@@ -314,7 +314,7 @@ export function StudentReportCard({ student, onClose, allowEditPhoto = true }: S
                 value={student.reportCardPresentDays ?? ''}
                 onChange={(e) => {
                   const val = parseInt(e.target.value);
-                  updateStudent(student.id, { reportCardPresentDays: isNaN(val) ? undefined : val });
+                  updateStudent(student.id, { reportCardPresentDays: isNaN(val) ? null : val });
                 }}
               />
               <span className="text-slate-400 font-bold">/</span>
@@ -326,7 +326,7 @@ export function StudentReportCard({ student, onClose, allowEditPhoto = true }: S
                 value={student.reportCardTotalDays ?? ''}
                 onChange={(e) => {
                   const val = parseInt(e.target.value);
-                  updateStudent(student.id, { reportCardTotalDays: isNaN(val) ? undefined : val });
+                  updateStudent(student.id, { reportCardTotalDays: isNaN(val) ? null : val });
                 }}
               />
             </div>

@@ -97,7 +97,8 @@ export function AdminPanel() {
   const [submittedStudent, setSubmittedStudent] = useState<Student | null>(null);
   const [editingStudent, setEditingStudent] = useState<Student | null>(null);
   const [newSessionName, setNewSessionName] = useState('');
-  const [selectedReportCardStudent, setSelectedReportCardStudent] = useState<Student | null>(null);
+  const [selectedReportCardStudentId, setSelectedReportCardStudentId] = useState<string | null>(null);
+  const selectedReportCardStudent = students.find(s => s.id === selectedReportCardStudentId) || null;
   const [examsView, setExamsView] = useState<'entry' | 'print'>('entry');
   const [attendanceOverviewDate, setAttendanceOverviewDate] = useState(() => new Date().toISOString().split('T')[0]);
   
@@ -815,7 +816,7 @@ export function AdminPanel() {
                                 <span>Edit details</span>
                               </button>
                               <button 
-                                onClick={() => setSelectedReportCardStudent(st)} 
+                                onClick={() => setSelectedReportCardStudentId(st.id)} 
                                 className="text-indigo-650 hover:text-indigo-850 p-1 bg-indigo-50 border border-indigo-100 rounded text-[9.5px] font-black uppercase flex items-center gap-0.5" 
                                 title="Exam Report Document Transcript"
                               >
@@ -1109,7 +1110,7 @@ export function AdminPanel() {
       {selectedReportCardStudent && (
         <StudentReportCard 
           student={selectedReportCardStudent} 
-          onClose={() => setSelectedReportCardStudent(null)} 
+          onClose={() => setSelectedReportCardStudentId(null)} 
         />
       )}
     </div>

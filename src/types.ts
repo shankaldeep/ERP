@@ -111,8 +111,8 @@ export interface Student extends User {
   permanentPoliceStation?: string;
 
   // 5. Report Card Details
-  reportCardTotalDays?: number;
-  reportCardPresentDays?: number;
+  reportCardTotalDays?: number | null;
+  reportCardPresentDays?: number | null;
 
   permanentTehsil?: string;
   permanentDistrict?: string;
