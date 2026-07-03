@@ -86,11 +86,11 @@ export function AttendanceTracker() {
 
     const entitiesToSave = currentEntityList.filter(s => {
       const existing = attendances.find(a => (a.userId === s.id || a.studentId === s.id) && a.date === selectedDate);
-      return !existing;
+      return !existing || existing.status !== getStatus(s.id);
     });
 
     if (entitiesToSave.length === 0) {
-      alert("All students' attendance is already recorded for this date. Cannot change existing records.");
+      alert("No changes in attendance to save for this date.");
       return;
     }
 

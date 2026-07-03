@@ -71,7 +71,7 @@ interface StudentRegistrationProps {
 const TAB_ORDER = ['basic', 'personal', 'parents', 'address', 'previous', 'academic', 'documents', 'fees'] as const;
 
 export function StudentRegistration({ onSuccess, onCancel, studentToEdit }: StudentRegistrationProps) {
-  const { addStudent, updateStudent, updateSchool, allowedSessions, students, schools, currentUser } = useStore();
+  const { addStudent, updateStudent, updateSchool, allowedSessions, students, schools, currentUser, activeAcademicSession } = useStore();
   const [subTab, setSubTab] = useState<'basic' | 'personal' | 'parents' | 'address' | 'previous' | 'academic' | 'documents' | 'fees'>('basic');
   
   const currentSchool = schools.find(s => s.id === currentUser?.schoolId);
@@ -173,7 +173,7 @@ export function StudentRegistration({ onSuccess, onCancel, studentToEdit }: Stud
       
       grade: 'Class 9',
       rollNo: '',
-      academicSession: '2026-27',
+      academicSession: activeAcademicSession || '2026-27',
       section: 'A',
       houseGroup: 'Ganga',
       medium: 'Hindi',

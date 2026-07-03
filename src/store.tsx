@@ -354,6 +354,25 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('sch_currentUser', JSON.stringify(currentUser));
   }, [currentUser]);
 
+  // Keep currentUser synced with its latest data in Firestore
+  useEffect(() => {
+    if (currentUser) {
+      const allUsersList = [...users, ...students, ...teachers, ...parentAccounts];
+      const latest = allUsersList.find(u => u.id === currentUser.id && u.role === currentUser.role);
+      if (latest) {
+        if (latest.name !== currentUser.name || 
+            latest.email !== currentUser.email || 
+            latest.password !== currentUser.password ||
+            (latest as any).grade !== (currentUser as any).grade ||
+            (latest as any).academicSession !== (currentUser as any).academicSession ||
+            (latest as any).rollNo !== (currentUser as any).rollNo ||
+            latest.schoolId !== currentUser.schoolId) {
+          setCurrentUser(latest);
+        }
+      }
+    }
+  }, [users, students, teachers, parentAccounts, currentUser]);
+
   const isAdminPanel = currentUser?.role === 'MASTER_ADMIN';
   const effectiveSchoolId = currentUser?.schoolId || '';
 
